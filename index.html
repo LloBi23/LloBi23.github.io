@@ -73,6 +73,31 @@
         .theme-choice[aria-pressed="true"] { color: #020617; background: #38bdf8; border-color: #38bdf8; }
         .theme-choice:focus-visible { outline: 2px solid #38bdf8; outline-offset: 2px; }
         .theme-simple-copy, .section-simple-marker { display: none; }
+        .back-to-top {
+            position: fixed;
+            right: 1.25rem;
+            bottom: 1.25rem;
+            z-index: 40;
+            display: inline-flex;
+            align-items: center;
+            gap: .45rem;
+            padding: .65rem .8rem;
+            border: 1px solid #1e2d47;
+            border-radius: 3px;
+            background: #0b111c;
+            color: #cbd5e1;
+            font: 500 11px 'JetBrains Mono', monospace;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, .22);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(.5rem);
+            transition: opacity .18s, transform .18s, background-color .18s, border-color .18s;
+        }
+        .back-to-top.is-visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        .back-to-top:hover { background: #101827; border-color: #38bdf8; color: #f8fafc; }
+        .back-to-top:focus-visible { outline: 2px solid #38bdf8; outline-offset: 3px; }
+        .role-bullets > li { position: relative; padding-left: 1.15rem; }
+        .role-bullets > li::before { content: '›'; position: absolute; left: 0; top: 0; color: #38bdf8; font: 600 1rem/1.45 'JetBrains Mono', monospace; }
         html[data-theme="simple"] { color-scheme: light; }
         html[data-theme="simple"] body {
             background-color: #f6f3ec !important;
@@ -138,6 +163,10 @@
         html[data-theme="simple"] .case-action { color: #426b5d !important; }
         html[data-theme="simple"] .theme-toggle { border-radius: 999px; font: 500 11px Inter, system-ui, -apple-system, sans-serif; }
         html[data-theme="simple"] .theme-choice { border-radius: 999px; }
+        html[data-theme="simple"] .back-to-top { border-color: #dfd8ca; border-radius: 999px; background: #fffdf8; color: #4b5c52; box-shadow: 0 8px 20px rgba(58, 48, 31, .08); font-family: Inter, system-ui, -apple-system, sans-serif; }
+        html[data-theme="simple"] .back-to-top:hover { background: #e7f0e9; border-color: #b9ccbd; color: #2e5144; }
+        html[data-theme="simple"] .back-to-top:focus-visible { outline-color: #486e60; }
+        html[data-theme="simple"] .role-bullets > li::before { content: '•'; color: #557a6b; font-family: Inter, system-ui, -apple-system, sans-serif; font-size: 1.2rem; line-height: 1.22; }
         @media (max-width: 380px) {
             .brand-full { display: none; }
             .brand-short { display: inline; }
@@ -451,10 +480,10 @@
                                 <span>HORIZON EUROPE</span>
                             </div>
                             <h3 class="text-lg sm:text-xl font-semibold text-slate-100">
-                                HORSE — 6G Wireless and Computing Ecosystems
+                                <a href="https://horse-6g.eu/" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 underline decoration-cyan-400/40 underline-offset-4 transition-colors">HORSE</a> — 6G Wireless and Computing Ecosystems
                             </h3>
                             <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
-                                Contributed to HORSE, a Horizon Europe project exploring resilient wireless and computing ecosystems for 6G. Work included support for an Open5GS/UERANSIM-based 5G Core/RAN testbed.
+                                Contributed to <a href="https://horse-6g.eu/" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 underline decoration-cyan-400/40 underline-offset-4 transition-colors">HORSE</a>, a Horizon Europe project exploring resilient wireless and computing ecosystems for 6G. Work included support for an Open5GS/UERANSIM-based 5G Core/RAN testbed.
                             </p>
                         </div>
 
@@ -480,11 +509,11 @@
                         <span class="theme-tech-copy"><span class="text-cyan-400">REFERENCED_RD_PROJECTS:</span> Publicly named collaborative research &amp; integration contexts</span><span class="theme-simple-copy"><span class="text-cyan-400">Collaborative research</span> · Selected projects</span>
                     </div>
                     <div class="flex flex-wrap items-center gap-2 font-mono text-xs">
-                        <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--project=HORSE</span>
-                        <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--project=CyclOps</span>
-                        <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--project=MARE/MARE6G</span>
-                        <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--project=UniMaaS</span>
-                        <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--project=SYNTACTIC</span>
+                        <a href="https://horse-6g.eu/" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 hover:text-cyan-300 hover:border-cyan-400/50 rounded-sm transition-colors">--project=HORSE</a>
+                        <a href="https://www.cyclopsproject.eu/" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 hover:text-cyan-300 hover:border-cyan-400/50 rounded-sm transition-colors">--project=CyclOps</a>
+                        <a href="https://mare6g.eu/" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 hover:text-cyan-300 hover:border-cyan-400/50 rounded-sm transition-colors">--project=MARE/MARE6G</a>
+                        <a href="https://unimaas-project.eu/" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 hover:text-cyan-300 hover:border-cyan-400/50 rounded-sm transition-colors">--project=UniMaaS</a>
+                        <a href="https://cordis.europa.eu/project/id/101296884" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 hover:text-cyan-300 hover:border-cyan-400/50 rounded-sm transition-colors">--project=SYNTACTIC</a>
                     </div>
                 </div>
 
@@ -768,7 +797,7 @@
                     <!-- Left Column: Professional Roles (7 cols) -->
                     <div class="lg:col-span-7 space-y-10">
                             <div class="font-mono text-xs uppercase text-slate-400 border-b border-slate-800 pb-2">
-                            <span class="theme-tech-copy">MAN(1) // PROFESSIONAL APPOINTMENTS</span><span class="theme-simple-copy">Professional appointments</span>
+                            <span class="theme-tech-copy">SECTION // PROFESSIONAL EXPERIENCE</span><span class="theme-simple-copy">Professional appointments</span>
                         </div>
 
                         <!-- Role 1: FOUR DOT INFINITY -->
@@ -787,11 +816,11 @@
                                 </span>
                             </div>
 
-                            <ul class="space-y-2.5 text-sm sm:text-base text-slate-300 leading-relaxed border-l border-slate-800 pl-4">
+                            <ul class="role-bullets space-y-2.5 text-sm sm:text-base text-slate-300 leading-relaxed border-l border-slate-800 pl-4">
                                 <li>Builds and operates 5G/6G testbeds spanning Open RAN, 5G Core and cloud-native research services.</li>
                                 <li>Integrates srsRAN, O-CU/O-DU, Open5GS and UERANSIM components; contributed to evaluation and trials involving Amarisoft’s 5G emulator.</li>
                                 <li>Runs the supporting Linux, container, Kubernetes, compute, virtual-machine, networking and observability infrastructure.</li>
-                                <li>Turns project requirements into reproducible integrations and pilots across CyclOps, MARE/MARE6G, UniMaaS and SYNTACTIC, resolving issues across component boundaries.</li>
+                                <li>Turns project requirements into reproducible integrations and pilots across <a href="https://www.cyclopsproject.eu/" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 underline decoration-cyan-400/40 underline-offset-4 transition-colors">CyclOps</a>, <a href="https://mare6g.eu/" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 underline decoration-cyan-400/40 underline-offset-4 transition-colors">MARE/MARE6G</a>, <a href="https://unimaas-project.eu/" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 underline decoration-cyan-400/40 underline-offset-4 transition-colors">UniMaaS</a> and <a href="https://cordis.europa.eu/project/id/101296884" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 underline decoration-cyan-400/40 underline-offset-4 transition-colors">SYNTACTIC</a>, resolving issues across component boundaries.</li>
                                 <li>Contributes to AI/ML-enabled network-security work, including traffic analysis, controlled protocol-level testing, anomaly detection and federated learning.</li>
                             </ul>
                         </div>
@@ -812,12 +841,12 @@
                                 </span>
                             </div>
 
-                            <ul class="space-y-2.5 text-sm sm:text-base text-slate-300 leading-relaxed border-l border-slate-800 pl-4">
+                            <ul class="role-bullets space-y-2.5 text-sm sm:text-base text-slate-300 leading-relaxed border-l border-slate-800 pl-4">
                                 <li>Conducts applied research in 5G/6G networks, network virtualisation and AI-assisted security.</li>
                                 <li>Builds and evaluates reproducible 5G Core/RAN testbeds and simulation environments to study performance, system behaviour and security.</li>
                                 <li>Investigates protocol-level security scenarios through traffic capture, analysis and controlled testing.</li>
                                 <li>Contributes to peer-reviewed work on AI-aided anomaly detection, virtual network embedding and intelligent network operations.</li>
-                                <li>Contributed to HORSE, a Horizon Europe project on resilient 6G wireless and computing ecosystems, supporting an Open5GS/UERANSIM-based 5G Core/RAN testbed.</li>
+                                <li>Contributed to <a href="https://horse-6g.eu/" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 underline decoration-cyan-400/40 underline-offset-4 transition-colors">HORSE</a>, a Horizon Europe project on resilient 6G wireless and computing ecosystems, supporting an Open5GS/UERANSIM-based 5G Core/RAN testbed.</li>
                             </ul>
                         </div>
                     </div>
@@ -825,7 +854,7 @@
                     <!-- Right Column: Education (5 cols) -->
                     <div class="lg:col-span-5 space-y-8">
                         <div class="font-mono text-xs uppercase text-slate-400 border-b border-slate-800 pb-2">
-                            <span class="theme-tech-copy">MAN(2) // EDUCATION</span><span class="theme-simple-copy">Education</span>
+                            <span class="theme-tech-copy">SECTION // EDUCATION</span><span class="theme-simple-copy">Education</span>
                         </div>
 
                         <!-- MSc -->
@@ -954,6 +983,10 @@
         <span id="toastMessage"></span>
     </div>
 
+    <button id="backToTop" type="button" class="back-to-top" aria-label="Back to top">
+        <span aria-hidden="true">↑</span><span class="theme-tech-copy">$ cd ~</span><span class="theme-simple-copy">Back to top</span>
+    </button>
+
     <script>
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
@@ -998,6 +1031,14 @@
         setTheme(savedTheme, false);
         themeButtons.forEach(button => button.addEventListener('click', () => setTheme(button.dataset.themeChoice)));
 
+        const backToTopButton = document.getElementById('backToTop');
+        function updateBackToTop() {
+            backToTopButton.classList.toggle('is-visible', window.scrollY > 420);
+        }
+        window.addEventListener('scroll', updateBackToTop, { passive: true });
+        updateBackToTop();
+        backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
         // Small, real console interaction: each command prints an accurate profile snippet.
         const consoleResponses = {
             whoami: {
@@ -1007,7 +1048,7 @@
                 output: '<span class="text-slate-400">RAN</span> srsRAN · O-CU/O-DU · Amarisoft<br><span class="text-slate-400">CORE</span> Open5GS · UERANSIM<br><span class="text-slate-400">PLATFORM</span> Linux · Docker · Kubernetes'
             },
             projects: {
-                output: '<span class="text-cyan-300">HORSE</span> · MARE6G · CyclOps<br><span class="text-slate-300">UniMaaS · SYNTACTIC</span><br><span class="text-slate-500">European collaborative R&amp;D</span>'
+                output: '<a href="https://horse-6g.eu/" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:underline">HORSE</a> · <a href="https://mare6g.eu/" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:underline">MARE6G</a> · <a href="https://www.cyclopsproject.eu/" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:underline">CyclOps</a><br><span class="text-slate-300"><a href="https://unimaas-project.eu/" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-300 hover:underline">UniMaaS</a> · <a href="https://cordis.europa.eu/project/id/101296884" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-300 hover:underline">SYNTACTIC</a></span><br><span class="text-slate-500">European collaborative R&amp;D</span>'
             }
         };
         document.querySelectorAll('.terminal-command').forEach(button => {
@@ -1068,6 +1109,7 @@
             cs4: {
                 subtitle: '04 // HORSE-6G-ECOSYSTEMS.CONF',
                 title: 'HORSE — 6G Wireless and Computing Ecosystems',
+                projectUrl: 'https://horse-6g.eu/',
                 summary: 'Contribution to the HORSE Horizon Europe project investigating resilient future wireless and computing ecosystems.',
                 bullets: [
                     'Supported an Open5GS and UERANSIM-based 5G Core/RAN experimental testbed.',
@@ -1082,7 +1124,12 @@
             const data = caseStudiesData[id];
             if (!data) return;
             document.getElementById('modalSubtitle').textContent = themeRoot.dataset.theme === 'simple' ? `Case study ${String(Number(id.slice(2))).padStart(2, '0')}` : data.subtitle;
-            document.getElementById('modalTitle').textContent = data.title;
+            const titleEl = document.getElementById('modalTitle');
+            if (data.projectUrl) {
+                titleEl.innerHTML = `<a href="${data.projectUrl}" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300 underline decoration-cyan-400/40 underline-offset-4 transition-colors">${data.title.split(' — ')[0]}</a>${data.title.includes(' — ') ? ` — ${data.title.split(' — ').slice(1).join(' — ')}` : ''}`;
+            } else {
+                titleEl.textContent = data.title;
+            }
             document.getElementById('modalSummary').textContent = data.summary;
             
             const bulletsEl = document.getElementById('modalBullets');
