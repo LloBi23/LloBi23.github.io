@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" data-theme="tech">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vasilis Nikolakakis — 5G/6G Network Engineer & Systems Researcher</title>
+    <meta name="description" content="Electrical Engineer and 5G/6G Network Engineer turning wireless research into integrated, testable systems, with a focus on security, resilience and practical engineering.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+                    },
+                    colors: {
+                        console: {
+                            950: '#070B12',
+                            900: '#0B111C',
+                            850: '#101827',
+                            800: '#162033',
+                            700: '#1E2D47',
+                        },
+                        cyan: {
+                            400: '#38BDF8',
+                            500: '#0EA5E9',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #070B12;
+            color: #F1F5F9;
+            overflow-x: hidden;
+        }
+        /* Restrained technical grid */
+        .bg-console-grid {
+            background-size: 48px 48px;
+            background-image: 
+                linear-gradient(to right, rgba(30, 41, 59, 0.22) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 41, 59, 0.22) 1px, transparent 1px);
+        }
+        /* Clean custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070B12;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 2px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+        .terminal-command[aria-pressed="true"] { color: #020617; background: #67e8f9; border-color: #67e8f9; }
+        .terminal-cursor { display: inline-block; width: .45rem; height: .9rem; vertical-align: -.12rem; background: #67e8f9; animation: cursor-blink 1.1s steps(2, start) infinite; }
+        @keyframes cursor-blink { to { visibility: hidden; } }
+        .theme-toggle { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border: 1px solid #1e293b; border-radius: 3px; background: #0b111c; font: 500 10px 'JetBrains Mono', monospace; }
+        .theme-choice { padding: 5px 7px; border: 1px solid transparent; color: #94a3b8; border-radius: 2px; transition: color .15s, background-color .15s, border-color .15s; }
+        .theme-choice:hover { color: #f8fafc; }
+        .theme-choice[aria-pressed="true"] { color: #020617; background: #38bdf8; border-color: #38bdf8; }
+        .theme-choice:focus-visible { outline: 2px solid #38bdf8; outline-offset: 2px; }
+        .theme-simple-copy, .section-simple-marker { display: none; }
+        html[data-theme="simple"] { color-scheme: light; }
+        html[data-theme="simple"] body {
+            background-color: #f6f3ec !important;
+            background-image: none !important;
+            color: #292d29 !important;
+            font-family: Inter, system-ui, -apple-system, sans-serif !important;
+        }
+        html[data-theme="simple"] [class*="font-mono"] { font-family: Inter, system-ui, -apple-system, sans-serif !important; letter-spacing: normal !important; }
+        html[data-theme="simple"] .bg-console-grid { background-image: none !important; }
+        html[data-theme="simple"] header { background-color: #f6f3ec !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; box-shadow: none !important; }
+        html[data-theme="simple"] ::-webkit-scrollbar-track { background: #f5f0e6; }
+        html[data-theme="simple"] ::-webkit-scrollbar-thumb { background: #d3cabb; }
+        html[data-theme="simple"] ::-webkit-scrollbar-thumb:hover { background: #b9ae9b; }
+        html[data-theme="simple"] [class*="bg-console-950"] { background-color: #fbf9f3 !important; }
+        html[data-theme="simple"] [class*="bg-console-900"] { background-color: #eee9de !important; }
+        html[data-theme="simple"] [class*="bg-console-900/25"] { background-color: #f0ece3 !important; }
+        html[data-theme="simple"] [class*="bg-console-850"] { background-color: #e8e1d4 !important; }
+        html[data-theme="simple"] [class*="bg-console-800"] { background-color: #ded7c9 !important; }
+        html[data-theme="simple"] [class*="bg-console-700"] { background-color: #d1c8b8 !important; }
+        html[data-theme="simple"] [class*="bg-cyan-400"] { background-color: #d8e6dc !important; }
+        html[data-theme="simple"] [class*="text-slate-50"], html[data-theme="simple"] [class*="text-slate-100"] { color: #252b27 !important; }
+        html[data-theme="simple"] [class*="text-slate-200"] { color: #343a35 !important; }
+        html[data-theme="simple"] [class*="text-slate-300"] { color: #4b534d !important; }
+        html[data-theme="simple"] [class*="text-slate-400"] { color: #687168 !important; }
+        html[data-theme="simple"] [class*="text-slate-500"] { color: #7d8177 !important; }
+        html[data-theme="simple"] [class*="text-slate-600"] { color: #898c80 !important; }
+        html[data-theme="simple"] [class*="text-cyan-400"], html[data-theme="simple"] [class*="text-cyan-300"], html[data-theme="simple"] [class*="text-cyan-500"] { color: #3f6f62 !important; }
+        html[data-theme="simple"] [class*="text-console-950"] { color: #26332c !important; }
+        html[data-theme="simple"] [class*="border-slate-800"], html[data-theme="simple"] [class*="border-slate-700"] { border-color: #d8d0c2 !important; }
+        html[data-theme="simple"] [class*="border-cyan-400"] { border-color: #9bb6a6 !important; }
+        html[data-theme="simple"] [class*="divide-slate-800"] > :not([hidden]) ~ :not([hidden]) { border-color: #ddd5c7 !important; }
+        html[data-theme="simple"] .theme-toggle { border-color: #d8d0c2; background: #eee9de; }
+        html[data-theme="simple"] .theme-choice { color: #677168; }
+        html[data-theme="simple"] .theme-choice:hover { color: #26332c; }
+        html[data-theme="simple"] .theme-choice[aria-pressed="true"] { color: #f8f6ef; background: #486e60; border-color: #486e60; }
+        html[data-theme="simple"] .theme-tech-copy { display: none !important; }
+        html[data-theme="simple"] .theme-simple-copy { display: inline !important; }
+        html[data-theme="simple"] .brand-terminal { display: none !important; }
+        html[data-theme="simple"] #terminalCommandLine, html[data-theme="simple"] .terminal-cursor, html[data-theme="simple"] .hero-prompt { display: none !important; }
+        html[data-theme="simple"] .hero-prompt + * { margin-top: 0 !important; }
+        html[data-theme="simple"] .theme-tech-only { display: none !important; }
+        html[data-theme="simple"] [class*="hover:bg-cyan-300"]:hover { background-color: #cbded1 !important; }
+        html[data-theme="simple"] .theme-choice:focus-visible { outline-color: #486e60; }
+        html[data-theme="simple"] .terminal-command[aria-pressed="true"] { color: #f8f6ef !important; background: #486e60 !important; border-color: #486e60 !important; }
+        html[data-theme="simple"] .terminal-cursor { background: #557a6b; }
+        html[data-theme="simple"] aside, html[data-theme="simple"] article, html[data-theme="simple"] #contact > div > div {
+            border-radius: 20px !important;
+            border-color: #e4ded2 !important;
+            box-shadow: 0 8px 26px rgba(54, 47, 33, .045) !important;
+        }
+        html[data-theme="simple"] aside { background-color: #fffdf8 !important; }
+        html[data-theme="simple"] aside > div:first-child { padding: 24px 24px 8px !important; background: transparent !important; border-color: transparent !important; color: #667168 !important; }
+        html[data-theme="simple"] aside > div:nth-child(2) { padding: 12px 24px 24px !important; }
+        html[data-theme="simple"] .console-status-dot { display: none !important; }
+        html[data-theme="simple"] #caseModal > div, html[data-theme="simple"] #toastBox { border-radius: 18px !important; }
+        html[data-theme="simple"] #caseModal { background: rgba(45, 43, 37, .38) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+        html[data-theme="simple"] .rounded-sm { border-radius: 9px; }
+        html[data-theme="simple"] .uppercase { text-transform: none !important; }
+        html[data-theme="simple"] body ::selection { color: #26332c; background: #d9e6dc; }
+        html[data-theme="simple"] .section-terminal-marker { display: none !important; }
+        html[data-theme="simple"] .section-simple-marker { display: block !important; }
+        html[data-theme="simple"] .tech-chip { border-radius: 999px !important; background-color: #ebe7de !important; border-color: transparent !important; color: #59645c !important; }
+        html[data-theme="simple"] .case-action { color: #426b5d !important; }
+        html[data-theme="simple"] .theme-toggle { border-radius: 999px; font: 500 11px Inter, system-ui, -apple-system, sans-serif; }
+        html[data-theme="simple"] .theme-choice { border-radius: 999px; }
+        @media (max-width: 380px) {
+            .brand-full { display: none; }
+            .brand-short { display: inline; }
+            .theme-choice { padding-inline: 5px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+        }
+    </style>
+</head>
+<body class="bg-console-grid antialiased selection:bg-cyan-400/20 selection:text-cyan-300">
+
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-console-950/90 border-b border-slate-800/80">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Prompt Brand Identity -->
+            <a href="#top" class="font-mono text-xs sm:text-sm text-slate-300 hover:text-white transition-colors flex items-center gap-2 focus:outline-none">
+                <span class="brand-terminal text-cyan-400 font-medium"><span class="brand-full">vasilis</span><span class="brand-short hidden">v</span>@network-lab<span class="text-slate-500">:</span><span class="text-slate-400">~</span><span class="text-cyan-400">$</span></span><span class="theme-simple-copy">Vasilis</span>
+            </a>
+
+            <!-- Desktop Command Navigation -->
+            <nav class="hidden lg:flex items-center gap-5 font-mono text-xs text-slate-300">
+                <a href="#about" class="hover:text-cyan-400 transition-colors"><span class="theme-tech-copy"><span class="text-slate-500">$</span> ./about</span><span class="theme-simple-copy">About</span></a>
+                <a href="#selected-work" class="hover:text-cyan-400 transition-colors"><span class="theme-tech-copy"><span class="text-slate-500">$</span> ./selected-work</span><span class="theme-simple-copy">Selected work</span></a>
+                <a href="#capabilities" class="hover:text-cyan-400 transition-colors"><span class="theme-tech-copy"><span class="text-slate-500">$</span> ./capabilities</span><span class="theme-simple-copy">Expertise</span></a>
+                <a href="#research" class="hover:text-cyan-400 transition-colors"><span class="theme-tech-copy"><span class="text-slate-500">$</span> ./research</span><span class="theme-simple-copy">Research</span></a>
+                <a href="#experience" class="hover:text-cyan-400 transition-colors"><span class="theme-tech-copy"><span class="text-slate-500">$</span> ./experience</span><span class="theme-simple-copy">Experience</span></a>
+                <a href="#contact" class="px-3 py-1.5 rounded-sm bg-console-900 hover:bg-console-800 text-slate-100 border border-slate-700/80 hover:border-cyan-400/50 transition-colors">
+                    <span class="theme-tech-copy"><span class="text-cyan-400">$</span> ./contact</span><span class="theme-simple-copy">Contact</span>
+                </a>
+            </nav>
+
+            <div class="flex items-center gap-2">
+                <div class="theme-toggle" role="group" aria-label="Choose website colour theme">
+                    <button type="button" class="theme-choice" data-theme-choice="simple" aria-pressed="false">Simple</button>
+                    <button type="button" class="theme-choice" data-theme-choice="tech" aria-pressed="true">Tech</button>
+                </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" aria-label="Toggle menu" class="lg:hidden px-2.5 py-1.5 rounded-sm bg-console-900 border border-slate-800 font-mono text-xs text-slate-300 hover:text-white">
+                <span class="theme-tech-copy">[menu]</span><span class="theme-simple-copy">Menu</span>
+            </button>
+            </div>
+        </div>
+
+        <!-- Mobile Command Drawer -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-console-900 border-b border-slate-800 px-4 pt-2 pb-4 space-y-2 font-mono text-xs">
+            <a href="#about" class="mobile-nav-link block py-2 text-slate-300 hover:text-cyan-400"><span class="theme-tech-copy">$ ./about</span><span class="theme-simple-copy">About</span></a>
+            <a href="#selected-work" class="mobile-nav-link block py-2 text-slate-300 hover:text-cyan-400"><span class="theme-tech-copy">$ ./selected-work</span><span class="theme-simple-copy">Selected work</span></a>
+            <a href="#capabilities" class="mobile-nav-link block py-2 text-slate-300 hover:text-cyan-400"><span class="theme-tech-copy">$ ./capabilities</span><span class="theme-simple-copy">Expertise</span></a>
+            <a href="#research" class="mobile-nav-link block py-2 text-slate-300 hover:text-cyan-400"><span class="theme-tech-copy">$ ./research</span><span class="theme-simple-copy">Research</span></a>
+            <a href="#experience" class="mobile-nav-link block py-2 text-slate-300 hover:text-cyan-400"><span class="theme-tech-copy">$ ./experience</span><span class="theme-simple-copy">Experience</span></a>
+            <a href="#contact" class="mobile-nav-link block py-2 text-cyan-400"><span class="theme-tech-copy">$ ./contact</span><span class="theme-simple-copy">Contact</span></a>
+        </div>
+    </header>
+
+    <main id="top">
+        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-28">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+                
+                <!-- Left Column: Terminal-Inspired Hero Copy -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="hero-prompt font-mono text-xs sm:text-sm text-slate-400 flex items-center gap-2">
+                        <span class="text-cyan-400">vasilis@network-lab:~$</span>
+                        <span class="text-slate-200">whoami</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-50">
+                            Vasilis Nikolakakis
+                        </h1>
+                        <p class="text-xl sm:text-2xl font-medium text-cyan-400 tracking-tight">
+                            5G/6G Network Engineer
+                        </p>
+                        <p class="font-mono text-xs sm:text-sm text-slate-300 pt-1">
+                            Open RAN <span class="text-slate-600">·</span> RAN/Core testbeds <span class="text-slate-600">·</span> Systems integration
+                        </p>
+                    </div>
+
+                    <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl font-normal">
+                        I build and integrate wireless-network testbeds, connecting RAN and core systems with the infrastructure needed to run them.
+                    </p>
+
+                    <!-- Command Flag Metadata Tags -->
+                    <div class="pt-1 flex flex-wrap gap-2 font-mono text-xs">
+                        <span class="px-2.5 py-1 bg-console-900/90 text-slate-300 border border-slate-800 rounded-sm">--open-ran</span>
+                        <span class="px-2.5 py-1 bg-console-900/90 text-slate-300 border border-slate-800 rounded-sm">--5g-core</span>
+                        <span class="px-2.5 py-1 bg-console-900/90 text-slate-300 border border-slate-800 rounded-sm">--private-5g</span>
+                        <span class="px-2.5 py-1 bg-console-900/90 text-slate-300 border border-slate-800 rounded-sm">--cloud-native</span>
+                        <span class="px-2.5 py-1 bg-console-900/90 text-slate-300 border border-slate-800 rounded-sm">--network-security</span>
+                    </div>
+
+                    <!-- Primary Navigation Actions -->
+                    <div class="pt-4 flex flex-wrap items-center gap-4 font-mono text-xs">
+                        <a href="#selected-work" class="px-4 py-2.5 rounded-sm bg-cyan-400 hover:bg-cyan-300 text-console-950 font-semibold transition-colors">
+                            <span class="theme-tech-copy">$ ./selected-work</span><span class="theme-simple-copy">View selected work</span>
+                        </a>
+                        <a href="#research" class="px-4 py-2.5 rounded-sm bg-console-900 hover:bg-console-800 text-slate-200 border border-slate-700/80 hover:border-slate-600 transition-colors">
+                            <span class="theme-tech-copy">$ ./research --papers</span><span class="theme-simple-copy">Research &amp; publications</span>
+                        </a>
+                    </div>
+
+                    <!-- Concise Environment Status Line -->
+                    <div class="pt-6 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs">
+                        <div>
+                            <span class="text-slate-500 block"><span class="theme-tech-copy">INDUSTRY_ROLE=</span><span class="theme-simple-copy">Industry</span></span>
+                            <span class="text-slate-200 mt-0.5 block">FOUR DOT INFINITY (DevOps &amp; R&amp;D)</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-500 block"><span class="theme-tech-copy">RESEARCH_ROLE=</span><span class="theme-simple-copy">Research</span></span>
+                            <span class="text-slate-200 mt-0.5 block">NKUA (Associate Researcher)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Tiny interactive network console -->
+                <div class="lg:col-span-5">
+                    <aside class="rounded-sm bg-console-900/90 border border-slate-800 shadow-xl overflow-hidden" aria-label="Profile summary and interactive details">
+                        <div class="px-4 py-3 bg-console-950/80 border-b border-slate-800 flex items-center justify-between font-mono text-[11px] text-slate-400">
+                            <span class="flex items-center gap-2"><span aria-hidden="true" class="console-status-dot w-1.5 h-1.5 rounded-full bg-cyan-400"></span><span class="theme-tech-copy">network-lab // command sampler</span><span class="theme-simple-copy">A little more about my work</span></span>
+                            <span class="text-slate-500 theme-tech-only">read-only</span>
+                        </div>
+                        <div class="p-5 sm:p-6 space-y-5">
+                            <div class="font-mono text-xs text-slate-400" aria-live="polite" aria-atomic="true">
+                                <div id="terminalCommandLine"><span class="text-cyan-400">vasilis@network-lab:~$</span> <span>./whoami</span></div>
+                                <div id="terminalOutput" class="mt-2 text-slate-200 leading-relaxed">Vasilis Nikolakakis<br><span class="text-cyan-300">5G/6G Network Engineer</span><br><span class="text-slate-500">building systems, not just diagrams</span></div>
+                                <span class="terminal-cursor mt-2" aria-hidden="true"></span>
+                            </div>
+                            <div class="flex flex-wrap gap-2 font-mono text-[11px]" role="group" aria-label="Explore profile details">
+                                <button type="button" class="terminal-command px-2.5 py-1.5 border border-slate-700 bg-console-950 text-slate-300 hover:text-white transition-colors" aria-pressed="true" data-command="whoami"><span class="theme-tech-copy">./whoami</span><span class="theme-simple-copy">Profile</span></button>
+                                <button type="button" class="terminal-command px-2.5 py-1.5 border border-slate-700 bg-console-950 text-slate-300 hover:text-white transition-colors" aria-pressed="false" data-command="stack"><span class="theme-tech-copy">./stack</span><span class="theme-simple-copy">Technical focus</span></button>
+                                <button type="button" class="terminal-command px-2.5 py-1.5 border border-slate-700 bg-console-950 text-slate-300 hover:text-white transition-colors" aria-pressed="false" data-command="projects"><span class="theme-tech-copy">./projects</span><span class="theme-simple-copy">Projects</span></button>
+                            </div>
+                            <div class="pt-4 border-t border-slate-800/80 font-mono text-[10px] text-slate-500 flex items-center justify-between">
+                                <span class="theme-tech-copy">run a command to explore</span><span class="theme-simple-copy">Select a topic to explore</span>
+                                <span class="text-cyan-400 theme-tech-only">● ready</span>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="about" class="py-16 lg:py-24 border-t border-slate-800/80">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                    
+                    <!-- Left Column: Section Marker & Man-Page Header -->
+                    <div class="lg:col-span-4 space-y-3">
+                        <div class="font-mono text-xs text-cyan-400">
+                            <span class="section-terminal-marker">[00] ./about</span><span class="section-simple-marker">About</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-slate-100 tracking-tight">
+                            <span class="theme-tech-copy">What I Do</span><span class="theme-simple-copy">How I work</span>
+                        </h2>
+                        <div class="pt-2 font-mono text-xs text-slate-400 space-y-1 border-l-2 border-slate-800 pl-3">
+                            <div><span class="text-slate-500"><span class="theme-tech-copy">LOCATION:</span><span class="theme-simple-copy">Based in</span></span> Athens, Greece</div>
+                            <div><span class="text-slate-500"><span class="theme-tech-copy">DISCIPLINE:</span><span class="theme-simple-copy">Background</span></span> Electrical &amp; Network Engineering</div>
+                            <div><span class="text-slate-500"><span class="theme-tech-copy">FOCUS:</span><span class="theme-simple-copy">Focus</span></span> Testbeds · Integration · Security</div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Clean Editorial Body Text (No Heavy Card Wrapper) -->
+                    <div class="lg:col-span-8 space-y-6">
+                        <p class="text-base sm:text-lg text-slate-200 leading-relaxed">
+                            I’m an Electrical Engineer working on the systems behind next-generation wireless networks. I focus on turning 5G/6G research into integrated, testable environments, with a particular interest in network security, resilience and the practical role of AI.
+                        </p>
+                        <p class="text-base sm:text-lg text-slate-300 leading-relaxed">
+                            I care about how networks behave beyond the diagram: how components fit together, how failures surface, and how an experiment becomes repeatable and useful. My approach is hands-on, systems-minded and grounded in making complex setups work end to end.
+                        </p>
+
+                        <!-- Selective Man-Page Summary Strip -->
+                        <div class="pt-6 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-6">
+                            <div>
+                                <div class="font-mono text-xs text-cyan-400 mb-1.5">--systems-integration</div>
+                                <p class="text-sm text-slate-400 leading-relaxed">
+                                    Bringing RAN, 5G Core and edge components together—and tracing faults across system boundaries.
+                                </p>
+                            </div>
+                            <div>
+                                <div class="font-mono text-xs text-cyan-400 mb-1.5">--reproducible-platforms</div>
+                                <p class="text-sm text-slate-400 leading-relaxed">
+                                    Building the Linux, container, networking and observability foundations that make research testbeds dependable.
+                                </p>
+                            </div>
+                            <div>
+                                <div class="font-mono text-xs text-cyan-400 mb-1.5">--security-telemetry</div>
+                                <p class="text-sm text-slate-400 leading-relaxed">
+                                    Studying 5G Core security and network telemetry, including AI-assisted anomaly-detection workflows.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="selected-work" class="py-16 lg:py-24 border-t border-slate-800/80 bg-console-900/25">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div class="space-y-2">
+                        <div class="font-mono text-xs text-cyan-400">
+                            <span class="section-terminal-marker">[01] ./selected-work</span><span class="section-simple-marker">Selected work</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-slate-100 tracking-tight">
+                            Selected Engineering &amp; Research Work
+                        </h2>
+                    </div>
+                    <p class="font-mono text-xs text-slate-400">
+                        <span class="theme-tech-copy">$ ls -la ./case-studies/</span><span class="theme-simple-copy">Selected projects and research</span>
+                    </p>
+                </div>
+
+                <!-- 4 Minimal Terminal-Bordered Case Studies -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Case Study 01 -->
+                    <article class="rounded-sm bg-console-900/60 border border-slate-800 hover:border-slate-700 p-6 flex flex-col justify-between transition-colors">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between font-mono text-xs text-slate-400 border-b border-slate-800/80 pb-2.5">
+                                <span class="text-cyan-400"><span class="theme-tech-copy">01 // testbeds.conf</span><span class="theme-simple-copy">Case study 01</span></span>
+                                <span>RAN &amp; 5G CORE</span>
+                            </div>
+                            <h3 class="text-lg sm:text-xl font-semibold text-slate-100">
+                                5G Open RAN and Core Network Testbeds
+                            </h3>
+                            <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+                                Integrated RAN and 5G Core testbeds for research and evaluation, using open and disaggregated components. Experience includes srsRAN, O-CU/O-DU, Open5GS and UERANSIM, alongside evaluation of Amarisoft’s 5G emulator.
+                            </p>
+                        </div>
+
+                        <div class="pt-6 mt-6 border-t border-slate-800/80 space-y-4">
+                            <div class="flex flex-wrap gap-2 font-mono text-xs text-slate-400">
+                                <span>--systems-integration</span>
+                                <span>--reproducibility</span>
+                                <span>--private-5g</span>
+                                <span>--failure-diagnosis</span>
+                            </div>
+                            <button onclick="openCaseModal('cs1')" class="case-action font-mono text-xs text-cyan-400 hover:text-cyan-300 inline-flex items-center gap-2">
+                                <span><span class="theme-tech-copy">$ cat ./01-ran-core-spec.txt</span><span class="theme-simple-copy">View case study</span></span>
+                                <span>&rarr;</span>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Case Study 02 -->
+                    <article class="rounded-sm bg-console-900/60 border border-slate-800 hover:border-slate-700 p-6 flex flex-col justify-between transition-colors">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between font-mono text-xs text-slate-400 border-b border-slate-800/80 pb-2.5">
+                                <span class="text-cyan-400"><span class="theme-tech-copy">02 // security-ai.conf</span><span class="theme-simple-copy">Case study 02</span></span>
+                                <span>TELEMETRY &amp; ML</span>
+                            </div>
+                            <h3 class="text-lg sm:text-xl font-semibold text-slate-100">
+                                Trustworthy AI for Network Security
+                            </h3>
+                            <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+                                Research and engineering on network-security analysis, combining traffic inspection and controlled protocol-level scenarios with AI/ML anomaly-detection workflows.
+                            </p>
+                        </div>
+
+                        <div class="pt-6 mt-6 border-t border-slate-800/80 space-y-4">
+                            <div class="flex flex-wrap gap-2 font-mono text-xs text-slate-400">
+                                <span>--network-security</span>
+                                <span>--telemetry</span>
+                                <span>--trustworthy-ai</span>
+                                <span>--resilience</span>
+                            </div>
+                            <button onclick="openCaseModal('cs2')" class="case-action font-mono text-xs text-cyan-400 hover:text-cyan-300 inline-flex items-center gap-2">
+                                <span><span class="theme-tech-copy">$ cat ./02-security-ai-spec.txt</span><span class="theme-simple-copy">View case study</span></span>
+                                <span>&rarr;</span>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Case Study 03 -->
+                    <article class="rounded-sm bg-console-900/60 border border-slate-800 hover:border-slate-700 p-6 flex flex-col justify-between transition-colors">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between font-mono text-xs text-slate-400 border-b border-slate-800/80 pb-2.5">
+                                <span class="text-cyan-400"><span class="theme-tech-copy">03 // platform-infra.conf</span><span class="theme-simple-copy">Case study 03</span></span>
+                                <span>CLOUD &amp; DEVOPS</span>
+                            </div>
+                            <h3 class="text-lg sm:text-xl font-semibold text-slate-100">
+                                Cloud-Native Research Infrastructure
+                            </h3>
+                            <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+                                Building and operating the Linux, container, Kubernetes, compute and networking infrastructure that supports multi-host telecom and AI research.
+                            </p>
+                        </div>
+
+                        <div class="pt-6 mt-6 border-t border-slate-800/80 space-y-4">
+                            <div class="flex flex-wrap gap-2 font-mono text-xs text-slate-400">
+                                <span>--cloud-native</span>
+                                <span>--devops-for-telecom</span>
+                                <span>--reproducible-deployments</span>
+                                <span>--edge-cloud</span>
+                            </div>
+                            <button onclick="openCaseModal('cs3')" class="case-action font-mono text-xs text-cyan-400 hover:text-cyan-300 inline-flex items-center gap-2">
+                                <span><span class="theme-tech-copy">$ cat ./03-platform-infra-spec.txt</span><span class="theme-simple-copy">View case study</span></span>
+                                <span>&rarr;</span>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Case Study 04 -->
+                    <article class="rounded-sm bg-console-900/60 border border-slate-800 hover:border-slate-700 p-6 flex flex-col justify-between transition-colors">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between font-mono text-xs text-slate-400 border-b border-slate-800/80 pb-2.5">
+                                <span class="text-cyan-400"><span class="theme-tech-copy">04 // horse-6g.conf</span><span class="theme-simple-copy">Case study 04</span></span>
+                                <span>HORIZON EUROPE</span>
+                            </div>
+                            <h3 class="text-lg sm:text-xl font-semibold text-slate-100">
+                                HORSE — 6G Wireless and Computing Ecosystems
+                            </h3>
+                            <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+                                Contributed to HORSE, a Horizon Europe project exploring resilient wireless and computing ecosystems for 6G. Work included support for an Open5GS/UERANSIM-based 5G Core/RAN testbed.
+                            </p>
+                        </div>
+
+                        <div class="pt-6 mt-6 border-t border-slate-800/80 space-y-4">
+                            <div class="flex flex-wrap gap-2 font-mono text-xs text-slate-400">
+                                <span>--6g-ecosystems</span>
+                                <span>--resilience</span>
+                                <span>--open5gs-ueransim</span>
+                                <span>--experimentation</span>
+                            </div>
+                            <button onclick="openCaseModal('cs4')" class="case-action font-mono text-xs text-cyan-400 hover:text-cyan-300 inline-flex items-center gap-2">
+                                <span><span class="theme-tech-copy">$ cat ./04-horse-6g-spec.txt</span><span class="theme-simple-copy">View case study</span></span>
+                                <span>&rarr;</span>
+                            </button>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- Publicly Referenced R&D Projects Output Line -->
+                <div class="pt-4 border-t border-slate-800/80 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                    <div class="font-mono text-xs text-slate-400">
+                        <span class="theme-tech-copy"><span class="text-cyan-400">REFERENCED_RD_PROJECTS:</span> Publicly named collaborative research &amp; integration contexts</span><span class="theme-simple-copy"><span class="text-cyan-400">Collaborative research</span> · Selected projects</span>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 font-mono text-xs">
+                        <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--project=HORSE</span>
+                        <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--project=CyclOps</span>
+                        <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--project=MARE/MARE6G</span>
+                        <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--project=UniMaaS</span>
+                        <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--project=SYNTACTIC</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="capabilities" class="py-16 lg:py-24 border-t border-slate-800/80">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <div class="space-y-2 max-w-2xl">
+                    <div class="font-mono text-xs text-cyan-400">
+                        <span class="section-terminal-marker">[02] ./capabilities</span><span class="section-simple-marker">Expertise</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-100 tracking-tight">
+                        <span class="theme-tech-copy">Technical Capabilities</span><span class="theme-simple-copy">Areas of expertise</span>
+                    </h2>
+                    <p class="text-sm sm:text-base text-slate-400">
+                        Wireless systems first, supported by the platforms and security work that make them practical.
+                    </p>
+                </div>
+
+                <!-- 3 Clean Architectural Columns (Divided by Hairlines, Not Boxed Cards) -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-8 pt-2">
+                    
+                    <!-- Group 1: Wireless Systems and Testbeds -->
+                    <div class="space-y-5 lg:pr-4">
+                        <div class="border-b border-slate-800 pb-3">
+                            <div class="font-mono text-xs text-cyan-400"><span class="theme-tech-copy">DOMAIN_01 // WIRELESS &amp; RAN</span><span class="theme-simple-copy">Wireless &amp; RAN</span></div>
+                            <h3 class="text-lg font-semibold text-slate-100 mt-1">
+                                Wireless systems and testbeds
+                            </h3>
+                        </div>
+
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            Integrates disaggregated Open RAN components and 5G Core functions into testable environments for research and evaluation.
+                        </p>
+
+                        <div class="flex flex-wrap gap-2 font-mono text-xs pt-1">
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--5g-6g</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--private-5g</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--open-ran</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--ran-5gc-integration</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--srsran</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--o-cu-o-du</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--open5gs</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--ueransim</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--amarisoft</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--network-virtualisation</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--vne</span>
+                        </div>
+                    </div>
+
+                    <!-- Group 2: Infrastructure and Platform Engineering -->
+                    <div class="space-y-5 lg:border-l lg:border-slate-800/80 lg:pl-8 lg:pr-4">
+                        <div class="border-b border-slate-800 pb-3">
+                            <div class="font-mono text-xs text-cyan-400"><span class="theme-tech-copy">DOMAIN_02 // PLATFORM &amp; DEVOPS</span><span class="theme-simple-copy">Platforms &amp; infrastructure</span></div>
+                            <h3 class="text-lg font-semibold text-slate-100 mt-1">
+                                Infrastructure and platform engineering
+                            </h3>
+                        </div>
+
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            Builds and operates the Linux, container, compute, networking and observability foundations for multi-host research platforms.
+                        </p>
+
+                        <div class="flex flex-wrap gap-2 font-mono text-xs pt-1">
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--linux</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--docker</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--kubernetes</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--virtual-machines</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--bare-metal</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--gpu-cpu-compute</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--vpns</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--routing-nat</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--dns-tls</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--reverse-proxies</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--observability</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--python-bash</span>
+                        </div>
+                    </div>
+
+                    <!-- Group 3: Security, Data and Intelligent Networks -->
+                    <div class="space-y-5 lg:border-l lg:border-slate-800/80 lg:pl-8">
+                        <div class="border-b border-slate-800 pb-3">
+                            <div class="font-mono text-xs text-cyan-400"><span class="theme-tech-copy">DOMAIN_03 // SECURITY &amp; AI</span><span class="theme-simple-copy">Security &amp; AI</span></div>
+                            <h3 class="text-lg font-semibold text-slate-100 mt-1">
+                                Security, data and intelligent networks
+                            </h3>
+                        </div>
+
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            Explores protocol-level security and network telemetry, including AI/ML approaches to anomaly detection and federated learning.
+                        </p>
+
+                        <div class="flex flex-wrap gap-2 font-mono text-xs pt-1">
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--5g-core-security</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--traffic-analysis</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--wireshark-tshark</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--scapy</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--pfcp-amf-security</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--anomaly-detection</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--federated-learning</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--ml-deployment</span>
+                            <span class="px-2.5 py-1 bg-console-900 border border-slate-800 text-slate-200 rounded-sm">--cloud-edge-systems</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="research" class="py-16 lg:py-24 border-t border-slate-800/80 bg-console-900/25">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+                
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+                    <div class="space-y-2 max-w-2xl">
+                    <div class="font-mono text-xs text-cyan-400">
+                        <span class="section-terminal-marker">[03] ./research</span><span class="section-simple-marker">Research</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-slate-100 tracking-tight">
+                            Research &amp; Publications
+                        </h2>
+                        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+                            Research contributions span AI-aided anomaly detection for 6G networks, federated learning across data spaces, and virtual network embedding.
+                        </p>
+                    </div>
+
+                    <!-- Command Flag Filter Controls -->
+                    <div class="flex flex-wrap gap-2 font-mono text-xs" role="group" aria-label="Filter publications">
+                        <button onclick="filterPubs('all')" id="pub-btn-all" class="pub-filter-btn px-3 py-1.5 rounded-sm bg-cyan-400 text-console-950 font-semibold transition-colors">
+                            --all
+                        </button>
+                        <button onclick="filterPubs('ai-sec')" id="pub-btn-ai-sec" class="pub-filter-btn px-3 py-1.5 rounded-sm bg-console-900 text-slate-300 border border-slate-800 hover:border-slate-700 transition-colors">
+                            --6g-security-ai
+                        </button>
+                        <button onclick="filterPubs('vne')" id="pub-btn-vne" class="pub-filter-btn px-3 py-1.5 rounded-sm bg-console-900 text-slate-300 border border-slate-800 hover:border-slate-700 transition-colors">
+                            --vne
+                        </button>
+                        <button onclick="filterPubs('continuum')" id="pub-btn-continuum" class="pub-filter-btn px-3 py-1.5 rounded-sm bg-console-900 text-slate-300 border border-slate-800 hover:border-slate-700 transition-colors">
+                            --continuum-edge
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Clean Man-Page / Log Style Publication Entries (Divided by Hairlines) -->
+                <div id="publicationsList" class="divide-y divide-slate-800/80 border-t border-b border-slate-800/80">
+                    
+                    <!-- Pub 1 -->
+                    <div class="pub-item py-5 flex flex-col lg:flex-row lg:items-baseline justify-between gap-4" data-category="continuum">
+                        <div class="space-y-1.5 max-w-3xl">
+                            <div class="font-mono text-xs text-cyan-400 flex flex-wrap items-center gap-2">
+                                <span>[2026]</span>
+                                <span class="text-slate-500">//</span>
+                                <span>SENSORS · JOURNAL ARTICLE</span>
+                                <span class="text-slate-500">//</span>
+                                <span class="text-slate-400">--computing-continuum</span>
+                            </div>
+                            <h3 class="text-base sm:text-lg font-semibold text-slate-100">
+                                A Survey on the Computing Continuum and Meta-Operating Systems: Perspectives, Architectures, Outcomes, and Open Challenges
+                            </h3>
+                            <p class="text-sm text-slate-400">
+                                P. K. Gkonis, A. Giannopoulos, N. Nomikos, L. Sarakis, <strong class="text-slate-200 font-medium">V. Nikolakakis</strong>, et al. — <em class="text-slate-300">Sensors</em>, 26(3), 799, 2026.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Pub 2 -->
+                    <div class="pub-item py-5 flex flex-col lg:flex-row lg:items-baseline justify-between gap-4" data-category="ai-sec">
+                        <div class="space-y-1.5 max-w-3xl">
+                            <div class="font-mono text-xs text-cyan-400 flex flex-wrap items-center gap-2">
+                                <span>[2025]</span>
+                                <span class="text-slate-500">//</span>
+                                <span>ELECTRONICS · JOURNAL ARTICLE</span>
+                                <span class="text-slate-500">//</span>
+                                <span class="text-slate-400">--trustworthy-ai --anomaly-detection</span>
+                            </div>
+                            <h3 class="text-base sm:text-lg font-semibold text-slate-100">
+                                A Distributed Trustable Framework for AI-Aided Anomaly Detection
+                            </h3>
+                            <p class="text-sm text-slate-400">
+                                N. Nomikos, G. Xylouris, G. Patsourakis, <strong class="text-slate-200 font-medium">V. Nikolakakis</strong>, A. Giannopoulos, et al. — <em class="text-slate-300">Electronics</em>, 14(3), 410, 2025.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Pub 3 -->
+                    <div class="pub-item py-5 flex flex-col lg:flex-row lg:items-baseline justify-between gap-4" data-category="ai-sec">
+                        <div class="space-y-1.5 max-w-3xl">
+                            <div class="font-mono text-xs text-cyan-400 flex flex-wrap items-center gap-2">
+                                <span>[2025]</span>
+                                <span class="text-slate-500">//</span>
+                                <span>IEEE BIGDATA CONFERENCE</span>
+                                <span class="text-slate-500">//</span>
+                                <span class="text-slate-400">--federated-learning</span>
+                            </div>
+                            <h3 class="text-base sm:text-lg font-semibold text-slate-100">
+                                Privacy-Preserving Hierarchical Federated Learning over Data Spaces
+                            </h3>
+                            <p class="text-sm text-slate-400">
+                                A. S. Kalafatelis, <strong class="text-slate-200 font-medium">V. Nikolakakis</strong>, N. Tsoulakos, P. Trakadas — <em class="text-slate-300">2025 IEEE International Conference on Big Data (BigData)</em>, pp. 6426–6435, 2025.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Pub 4 -->
+                    <div class="pub-item py-5 flex flex-col lg:flex-row lg:items-baseline justify-between gap-4" data-category="ai-sec">
+                        <div class="space-y-1.5 max-w-3xl">
+                            <div class="font-mono text-xs text-cyan-400 flex flex-wrap items-center gap-2">
+                                <span>[2024]</span>
+                                <span class="text-slate-500">//</span>
+                                <span>IEEE CAMAD WORKSHOP</span>
+                                <span class="text-slate-500">//</span>
+                                <span class="text-slate-400">--6g-networks --anomaly-detection</span>
+                            </div>
+                            <h3 class="text-base sm:text-lg font-semibold text-slate-100">
+                                A Distributed Trustable AI Engine for Anomaly Detection in 6G Networks: Architecture, Use Cases and Performance Evaluation
+                            </h3>
+                            <p class="text-sm text-slate-400">
+                                G. Xylouris, P. Trakadas, A. Giannopoulos, <strong class="text-slate-200 font-medium">V. Nikolakakis</strong>, G. Patsourakis, et al. — <em class="text-slate-300">2024 IEEE 29th International Workshop on Computer Aided Modeling and Design of Communication Links and Networks (CAMAD)</em>, 2024.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Pub 5 -->
+                    <div class="pub-item py-5 flex flex-col lg:flex-row lg:items-baseline justify-between gap-4" data-category="vne">
+                        <div class="space-y-1.5 max-w-3xl">
+                            <div class="font-mono text-xs text-cyan-400 flex flex-wrap items-center gap-2">
+                                <span>[2021]</span>
+                                <span class="text-slate-500">//</span>
+                                <span>TELECOM · JOURNAL ARTICLE</span>
+                                <span class="text-slate-500">//</span>
+                                <span class="text-slate-400">--vne --network-virtualisation</span>
+                            </div>
+                            <h3 class="text-base sm:text-lg font-semibold text-slate-100">
+                                Comprehensive Comparison of VNE Solutions Based on Different Coordination Approaches
+                            </h3>
+                            <p class="text-sm text-slate-400">
+                                S. Prekas, P. Karkazis, <strong class="text-slate-200 font-medium">V. Nikolakakis</strong>, P. Trakadas — <em class="text-slate-300">Telecom</em>, 2(4), pp. 390–412, 2021.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Pub 6 -->
+                    <div class="pub-item py-5 flex flex-col lg:flex-row lg:items-baseline justify-between gap-4" data-category="vne">
+                        <div class="space-y-1.5 max-w-3xl">
+                            <div class="font-mono text-xs text-cyan-400 flex flex-wrap items-center gap-2">
+                                <span>[2020]</span>
+                                <span class="text-slate-500">//</span>
+                                <span>PCI CONFERENCE PROCEEDINGS</span>
+                                <span class="text-slate-500">//</span>
+                                <span class="text-slate-400">--vne-heuristics</span>
+                            </div>
+                            <h3 class="text-base sm:text-lg font-semibold text-slate-100">
+                                Comparison of VNE Heuristic Solutions with Similar Objective Functions
+                            </h3>
+                            <p class="text-sm text-slate-400">
+                                S. Prekas, P. Karkazis, P. Trakadas, <strong class="text-slate-200 font-medium">V. Nikolakakis</strong> — <em class="text-slate-300">Proceedings of the 24th Pan-Hellenic Conference on Informatics (PCI)</em>, pp. 22–26, 2020.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section id="experience" class="py-16 lg:py-24 border-t border-slate-800/80">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+                
+                <div class="space-y-2 max-w-2xl">
+                    <div class="font-mono text-xs text-cyan-400">
+                        <span class="section-terminal-marker">[04] ./experience</span><span class="section-simple-marker">Experience</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-100 tracking-tight">
+                        <span class="theme-tech-copy">Experience &amp; Academic Background</span><span class="theme-simple-copy">Experience &amp; education</span>
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    
+                    <!-- Left Column: Professional Roles (7 cols) -->
+                    <div class="lg:col-span-7 space-y-10">
+                            <div class="font-mono text-xs uppercase text-slate-400 border-b border-slate-800 pb-2">
+                            <span class="theme-tech-copy">MAN(1) // PROFESSIONAL APPOINTMENTS</span><span class="theme-simple-copy">Professional appointments</span>
+                        </div>
+
+                        <!-- Role 1: FOUR DOT INFINITY -->
+                        <div class="space-y-4">
+                            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                                <div>
+                                    <h3 class="text-lg sm:text-xl font-semibold text-slate-100">
+                                        Network Engineer | DevOps &amp; R&amp;D
+                                    </h3>
+                                    <div class="font-mono text-xs text-cyan-400 mt-0.5">
+                                        FOUR DOT INFINITY
+                                    </div>
+                                </div>
+                                <span class="font-mono text-xs text-slate-400">
+                                    <span class="theme-tech-copy">[Jan 2023 – Present]</span><span class="theme-simple-copy">Jan 2023 – Present</span>
+                                </span>
+                            </div>
+
+                            <ul class="space-y-2.5 text-sm sm:text-base text-slate-300 leading-relaxed border-l border-slate-800 pl-4">
+                                <li>Builds and operates 5G/6G testbeds spanning Open RAN, 5G Core and cloud-native research services.</li>
+                                <li>Integrates srsRAN, O-CU/O-DU, Open5GS and UERANSIM components; contributed to evaluation and trials involving Amarisoft’s 5G emulator.</li>
+                                <li>Runs the supporting Linux, container, Kubernetes, compute, virtual-machine, networking and observability infrastructure.</li>
+                                <li>Turns project requirements into reproducible integrations and pilots across CyclOps, MARE/MARE6G, UniMaaS and SYNTACTIC, resolving issues across component boundaries.</li>
+                                <li>Contributes to AI/ML-enabled network-security work, including traffic analysis, controlled protocol-level testing, anomaly detection and federated learning.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Role 2: NKUA -->
+                        <div class="space-y-4 pt-4 border-t border-slate-800/60">
+                            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                                <div>
+                                    <h3 class="text-lg sm:text-xl font-semibold text-slate-100">
+                                        Associate Researcher
+                                    </h3>
+                                    <div class="font-mono text-xs text-cyan-400 mt-0.5">
+                                        National and Kapodistrian University of Athens (NKUA)
+                                    </div>
+                                </div>
+                                <span class="font-mono text-xs text-slate-400">
+                                    <span class="theme-tech-copy">[Sep 2022 – Present]</span><span class="theme-simple-copy">Sep 2022 – Present</span>
+                                </span>
+                            </div>
+
+                            <ul class="space-y-2.5 text-sm sm:text-base text-slate-300 leading-relaxed border-l border-slate-800 pl-4">
+                                <li>Conducts applied research in 5G/6G networks, network virtualisation and AI-assisted security.</li>
+                                <li>Builds and evaluates reproducible 5G Core/RAN testbeds and simulation environments to study performance, system behaviour and security.</li>
+                                <li>Investigates protocol-level security scenarios through traffic capture, analysis and controlled testing.</li>
+                                <li>Contributes to peer-reviewed work on AI-aided anomaly detection, virtual network embedding and intelligent network operations.</li>
+                                <li>Contributed to HORSE, a Horizon Europe project on resilient 6G wireless and computing ecosystems, supporting an Open5GS/UERANSIM-based 5G Core/RAN testbed.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Education (5 cols) -->
+                    <div class="lg:col-span-5 space-y-8">
+                        <div class="font-mono text-xs uppercase text-slate-400 border-b border-slate-800 pb-2">
+                            <span class="theme-tech-copy">MAN(2) // EDUCATION</span><span class="theme-simple-copy">Education</span>
+                        </div>
+
+                        <!-- MSc -->
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between font-mono text-xs">
+                                <span class="text-cyan-400"><span class="theme-tech-copy">MSc [IN PROGRESS]</span><span class="theme-simple-copy">MSc · In progress</span></span>
+                                <span class="text-slate-400">2026 – Present</span>
+                            </div>
+                            <h3 class="text-base sm:text-lg font-semibold text-slate-100">
+                                Next Generation Communication Networks and Distributed Application Environments
+                            </h3>
+                            <div class="font-mono text-xs text-slate-300">
+                                University of West Attica (UniWA)
+                            </div>
+                            <p class="text-sm text-slate-400 leading-relaxed pt-1">
+                                Focus areas include programmable communication networks, distributed systems, cybersecurity, cloud and edge computing, next-generation mobile networks, IoT and big-data systems.
+                            </p>
+                        </div>
+
+                        <!-- BEng -->
+                        <div class="space-y-2 pt-6 border-t border-slate-800/60">
+                            <div class="flex items-center justify-between font-mono text-xs">
+                                <span class="text-cyan-400"><span class="theme-tech-copy">BEng [COMPLETED]</span><span class="theme-simple-copy">BEng · Completed</span></span>
+                                <span class="text-slate-400">2016 – 2021</span>
+                            </div>
+                            <h3 class="text-base sm:text-lg font-semibold text-slate-100">
+                                Electrical, Electronics and Telecommunications Engineering
+                            </h3>
+                            <div class="font-mono text-xs text-slate-300">
+                                National and Kapodistrian University of Athens (NKUA)
+                            </div>
+                            <div class="mt-3 p-4 rounded-sm bg-console-900/70 border border-slate-800 space-y-1.5">
+                                <div class="font-mono text-xs text-cyan-400"><span class="theme-tech-copy">THESIS_GRADE=10/10 // VIRTUAL NETWORK EMBEDDING</span><span class="theme-simple-copy">Thesis · 10/10 · Virtual network embedding</span></div>
+                                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                                    Involved literature analysis, simulation-based benchmarking and comparative evaluation of VNE algorithms, forming the basis for subsequent peer-reviewed publications.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-16 lg:py-24 border-t border-slate-800/80 bg-console-900/25">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="rounded-sm bg-console-900/90 border border-slate-800 p-6 sm:p-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                        
+                        <div class="lg:col-span-7 space-y-4">
+                            <div class="font-mono text-xs text-cyan-400">
+                                <span class="section-terminal-marker">[05] ./contact</span><span class="section-simple-marker">Contact</span>
+                            </div>
+                            <h2 class="text-2xl sm:text-3xl font-bold text-slate-100 tracking-tight">
+                                Contact &amp; Profiles
+                            </h2>
+                            <p class="text-sm sm:text-base text-slate-300 max-w-xl leading-relaxed">
+                                For research collaboration, 5G/6G testbeds or systems-engineering enquiries, reach me by email or through my research and professional profiles.
+                            </p>
+                            <div class="pt-2 font-mono text-xs text-slate-400 space-y-1">
+                                <div><span class="text-slate-500"><span class="theme-tech-copy">HOST_LOCATION:</span><span class="theme-simple-copy">Based in</span></span> Athens, Greece</div>
+                                <div><span class="text-slate-500"><span class="theme-tech-copy">AFFILIATIONS:</span><span class="theme-simple-copy">Affiliations</span></span> FOUR DOT INFINITY · NKUA</div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Terminal Output Links -->
+                        <div class="lg:col-span-5 space-y-3 font-mono text-xs">
+                            <div class="p-3.5 rounded-sm bg-console-950 border border-slate-800 flex items-center justify-between gap-3">
+                                <div class="truncate">
+                                    <span class="text-slate-500 block text-[11px]"><span class="theme-tech-copy">EMAIL_ADDR</span><span class="theme-simple-copy">Email</span></span>
+                                    <a id="emailAddressText" href="mailto:nikolakakis.vasileios@gmail.com" class="text-slate-200 hover:text-cyan-300 transition-colors">nikolakakis.vasileios@gmail.com</a>
+                                </div>
+                                <button onclick="copyEmailAddress()" class="px-3 py-1.5 rounded-sm bg-console-800 hover:bg-console-700 text-cyan-400 border border-slate-700 shrink-0 transition-colors">
+                                    <span class="theme-tech-copy">--copy</span><span class="theme-simple-copy">Copy</span>
+                                </button>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                                <a href="https://scholar.google.com/citations?user=oIcIUdoAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="p-3 rounded-sm bg-console-950 hover:bg-console-850 border border-slate-800 hover:border-cyan-400/50 text-slate-200 flex items-center justify-between transition-colors">
+                                    <span><span class="theme-tech-copy">$ open --scholar</span><span class="theme-simple-copy">Google Scholar</span></span>
+                                    <span class="text-cyan-400">&nearr;</span>
+                                </a>
+                                <a href="https://www.linkedin.com/in/vasilis-nikolakakis/" target="_blank" rel="noopener noreferrer" class="p-3 rounded-sm bg-console-950 hover:bg-console-850 border border-slate-800 hover:border-cyan-400/50 text-slate-200 flex items-center justify-between transition-colors">
+                                    <span><span class="theme-tech-copy">$ open --linkedin</span><span class="theme-simple-copy">LinkedIn</span></span>
+                                    <span class="text-cyan-400">&nearr;</span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-800/80 py-8 bg-console-950 font-mono text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>© <span id="currentYear">2026</span> Vasilis Nikolakakis</div>
+            <div class="text-slate-500">
+                Athens, GR · 5G/6G Systems &amp; Research
+            </div>
+        </div>
+    </footer>
+
+    <!-- Case Study Specification Modal -->
+    <div id="caseModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-console-950/85 backdrop-blur-sm">
+        <div class="bg-console-900 border border-slate-700 rounded-sm max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-5">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3 font-mono text-xs">
+                <span id="modalSubtitle" class="text-cyan-400"></span>
+                <button onclick="closeCaseModal()" aria-label="Close modal" class="text-slate-400 hover:text-white px-2 py-1 bg-console-950 border border-slate-800 rounded-sm">
+                    <span class="theme-tech-copy">[q / esc]</span><span class="theme-simple-copy">Close</span>
+                </button>
+            </div>
+            <h3 id="modalTitle" class="text-xl sm:text-2xl font-bold text-slate-100"></h3>
+            <p id="modalSummary" class="text-sm sm:text-base text-slate-300 leading-relaxed"></p>
+            <div class="space-y-2 pt-2">
+                <div class="font-mono text-xs text-slate-400 uppercase"><span class="theme-tech-copy">ENGINEERING_SCOPE:</span><span class="theme-simple-copy">Engineering focus</span></div>
+                <ul id="modalBullets" class="space-y-2 text-sm text-slate-200"></ul>
+            </div>
+            <div class="pt-4 border-t border-slate-800 flex flex-wrap gap-2 font-mono text-xs" id="modalTags"></div>
+        </div>
+    </div>
+
+    <!-- Non-intrusive Console Toast -->
+    <div id="toastBox" class="fixed bottom-5 right-5 z-50 hidden px-4 py-3 rounded-sm bg-console-900 border border-cyan-400/50 text-slate-100 text-xs font-mono shadow-xl">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Keep the theme switch simple and remember the reader's choice when storage is available.
+        const themeRoot = document.documentElement;
+        const themeButtons = document.querySelectorAll('[data-theme-choice]');
+        const simpleTagWords = { '5g': '5G', '6g': '6G', 'ai': 'AI', 'ml': 'ML', 'ran': 'RAN', 'vne': 'VNE', 'gpu': 'GPU', 'cpu': 'CPU', 'pfcp': 'PFCP', 'amf': 'AMF', 'dns': 'DNS', 'tls': 'TLS', 'nat': 'NAT', 'vpn': 'VPN', 'srsran': 'srsRAN', 'open5gs': 'Open5GS', 'ueransim': 'UERANSIM', 'mare6g': 'MARE6G', 'mare': 'MARE', 'cyclops': 'CyclOps', 'unimaas': 'UniMaaS', 'syntactic': 'SYNTACTIC', 'horse': 'HORSE', 'devops': 'DevOps', 'linux': 'Linux', 'docker': 'Docker', 'kubernetes': 'Kubernetes', 'scapy': 'Scapy' };
+        function simpleTagLabel(techLabel) {
+            const known = { 'o-cu-o-du': 'O-CU / O-DU', 'wireshark-tshark': 'Wireshark / tshark', 'python-bash': 'Python / Bash', 'gpu-cpu-compute': 'GPU / CPU compute', 'vpn-routing-nat': 'VPN / routing / NAT', 'all': 'All', '6g-security-ai': '6G security & AI', 'continuum-edge': 'Computing continuum & edge', 'vne': 'Virtual network embedding' };
+            return techLabel.trim().split(/\s+/).map(label => {
+                if (label.startsWith('--project=')) return label.slice('--project='.length);
+                const value = label.replace(/^--/, '');
+                if (known[value]) return known[value];
+                return value.split('-').map(word => simpleTagWords[word.toLowerCase()] || (word ? word[0].toUpperCase() + word.slice(1) : '')).join(' ');
+            }).join(' · ');
+        }
+        function updateThemeLabels(theme) {
+            document.querySelectorAll('span, button').forEach(element => {
+                if (element.children.length) return;
+                if (!element.dataset.techLabel && element.textContent.trim().startsWith('--')) element.dataset.techLabel = element.textContent.trim();
+                if (!element.dataset.techLabel) return;
+                element.textContent = theme === 'simple' ? simpleTagLabel(element.dataset.techLabel) : element.dataset.techLabel;
+                if (element.tagName === 'SPAN') element.classList.toggle('tech-chip', theme === 'simple');
+            });
+        }
+        function setTheme(theme, persist = true) {
+            const selectedTheme = theme === 'simple' ? 'simple' : 'tech';
+            themeRoot.dataset.theme = selectedTheme;
+            themeButtons.forEach(button => {
+                button.setAttribute('aria-pressed', String(button.dataset.themeChoice === selectedTheme));
+            });
+            updateThemeLabels(selectedTheme);
+            if (persist) {
+                try { localStorage.setItem('vasilis-site-theme', selectedTheme); } catch (error) { /* Keep the switch usable without storage. */ }
+            }
+        }
+        let savedTheme = 'tech';
+        try {
+            const storedTheme = localStorage.getItem('vasilis-site-theme');
+            if (storedTheme === 'simple' || storedTheme === 'tech') savedTheme = storedTheme;
+        } catch (error) { /* Use the default theme when storage is unavailable. */ }
+        setTheme(savedTheme, false);
+        themeButtons.forEach(button => button.addEventListener('click', () => setTheme(button.dataset.themeChoice)));
+
+        // Small, real console interaction: each command prints an accurate profile snippet.
+        const consoleResponses = {
+            whoami: {
+                output: 'Vasilis Nikolakakis<br><span class="text-cyan-300">5G/6G Network Engineer</span><br><span class="text-slate-500">building systems, not just diagrams</span>'
+            },
+            stack: {
+                output: '<span class="text-slate-400">RAN</span> srsRAN · O-CU/O-DU · Amarisoft<br><span class="text-slate-400">CORE</span> Open5GS · UERANSIM<br><span class="text-slate-400">PLATFORM</span> Linux · Docker · Kubernetes'
+            },
+            projects: {
+                output: '<span class="text-cyan-300">HORSE</span> · MARE6G · CyclOps<br><span class="text-slate-300">UniMaaS · SYNTACTIC</span><br><span class="text-slate-500">European collaborative R&amp;D</span>'
+            }
+        };
+        document.querySelectorAll('.terminal-command').forEach(button => {
+            button.addEventListener('click', () => {
+                const key = button.dataset.command;
+                const terminalCommands = { whoami: './whoami', stack: './stack', projects: './projects' };
+                document.getElementById('terminalCommandLine').innerHTML = `<span class="text-cyan-400">vasilis@network-lab:~$</span> <span>${terminalCommands[key]}</span>`;
+                document.getElementById('terminalOutput').innerHTML = consoleResponses[key].output;
+                document.querySelectorAll('.terminal-command').forEach(command => command.setAttribute('aria-pressed', String(command === button)));
+            });
+        });
+
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Case Study Modal Specifications
+        const caseStudiesData = {
+            cs1: {
+                subtitle: '01 // 5G-OPEN-RAN-CORE.CONF',
+                title: '5G Open RAN and Core Network Testbeds',
+                summary: 'Design, deployment and operation of integrated RAN/Core environments for research, evaluation and experimentation.',
+                bullets: [
+                    'Deploys and integrates end-to-end RAN and 5G Core stacks using srsRAN, disaggregated O-CU/O-DU components, Open5GS, and UERANSIM.',
+                    'Contributed to Amarisoft 5G emulator evaluation and testing trials.',
+                    'Diagnoses cross-component failures across radio, control-plane (NGAP/SBi), and user-plane (GTP-U/PFCP) links to bring testbeds into a reliable operational state.'
+                ],
+                tags: ['--srsran', '--o-cu-o-du', '--open5gs', '--ueransim', '--amarisoft', '--private-5g']
+            },
+            cs2: {
+                subtitle: '02 // TRUSTWORTHY-AI-SEC.CONF',
+                title: 'Trustworthy AI for Network Security',
+                summary: 'Applied work exploring anomaly detection and security analysis for next-generation communication systems.',
+                bullets: [
+                    'Conducts controlled protocol-level attack simulations and security evaluations targeting 5G Core interfaces including PFCP and AMF workflows.',
+                    'Captures, parses, and synthesizes network traffic using Wireshark, tshark, and Scapy to generate telemetry datasets.',
+                    'Contributes to AI/ML-enabled anomaly detection and federated learning workflows in experimental network environments.'
+                ],
+                tags: ['--5g-core-security', '--pfcp-amf', '--wireshark-tshark', '--scapy', '--trustworthy-ai', '--federated-learning']
+            },
+            cs3: {
+                subtitle: '03 // CLOUD-NATIVE-INFRA.CONF',
+                title: 'Cloud-Native Research Infrastructure',
+                summary: 'Engineering of the platforms behind network and AI experimentation across multi-host environments.',
+                bullets: [
+                    'Builds and operates Linux hosts, bare-metal servers, virtual machines, and GPU/CPU compute environments.',
+                    'Orchestrates containerised services and network functions using Docker and Kubernetes.',
+                    'Engineers VPNs, routing, NAT, DNS, TLS, reverse proxies, and observability stacks for reproducible deployments.'
+                ],
+                tags: ['--linux', '--docker', '--kubernetes', '--gpu-cpu-compute', '--vpn-routing-nat', '--dns-tls', '--observability']
+            },
+            cs4: {
+                subtitle: '04 // HORSE-6G-ECOSYSTEMS.CONF',
+                title: 'HORSE — 6G Wireless and Computing Ecosystems',
+                summary: 'Contribution to the HORSE Horizon Europe project investigating resilient future wireless and computing ecosystems.',
+                bullets: [
+                    'Supported an Open5GS and UERANSIM-based 5G Core/RAN experimental testbed.',
+                    'Evaluated reproducible testbed scenarios to support resilience, performance, and security investigations.',
+                    'Connected experimental testbed engineering with peer-reviewed research outcomes.'
+                ],
+                tags: ['--horizon-europe-horse', '--6g-resilience', '--open5gs', '--ueransim', '--experimentation']
+            }
+        };
+
+        function openCaseModal(id) {
+            const data = caseStudiesData[id];
+            if (!data) return;
+            document.getElementById('modalSubtitle').textContent = themeRoot.dataset.theme === 'simple' ? `Case study ${String(Number(id.slice(2))).padStart(2, '0')}` : data.subtitle;
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalSummary').textContent = data.summary;
+            
+            const bulletsEl = document.getElementById('modalBullets');
+            bulletsEl.innerHTML = data.bullets.map(b => 
+                `<li class="flex items-start gap-2.5"><span class="text-cyan-400 font-mono text-xs mt-1">-</span><span>${b}</span></li>`
+            ).join('');
+
+            const tagsEl = document.getElementById('modalTags');
+            tagsEl.innerHTML = data.tags.map(t => 
+                `<span data-tech-label="${t}" class="tech-chip px-2.5 py-1 bg-console-950 text-slate-300 border border-slate-800 rounded-sm">${themeRoot.dataset.theme === 'simple' ? simpleTagLabel(t) : t}</span>`
+            ).join('');
+
+            const modal = document.getElementById('caseModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeCaseModal() {
+            const modal = document.getElementById('caseModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        document.getElementById('caseModal').addEventListener('click', (e) => {
+            if (e.target.id === 'caseModal') closeCaseModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' || e.key === 'q') closeCaseModal();
+        });
+
+        // Filter Publications
+        function filterPubs(category) {
+            const items = document.querySelectorAll('.pub-item');
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+
+            document.querySelectorAll('.pub-filter-btn').forEach(btn => {
+                btn.className = 'pub-filter-btn px-3 py-1.5 rounded-sm bg-console-900 text-slate-300 border border-slate-800 hover:border-slate-700 transition-colors';
+            });
+            const activeBtn = document.getElementById('pub-btn-' + category);
+            if (activeBtn) {
+                activeBtn.className = 'pub-filter-btn px-3 py-1.5 rounded-sm bg-cyan-400 text-console-950 font-semibold transition-colors';
+            }
+        }
+
+        // Copy Email Helper
+        function copyEmailAddress() {
+            const emailText = document.getElementById('emailAddressText').textContent;
+            const tempInput = document.createElement('textarea');
+            tempInput.value = emailText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                showToast('Copied to clipboard: ' + emailText);
+            } catch (err) {
+                showToast('Email: ' + emailText);
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        let toastTimeout;
+        function showToast(msg) {
+            const box = document.getElementById('toastBox');
+            const text = document.getElementById('toastMessage');
+            text.textContent = msg;
+            box.classList.remove('hidden');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                box.classList.add('hidden');
+            }, 3200);
+        }
+    </script>
+</body>
+</html>
